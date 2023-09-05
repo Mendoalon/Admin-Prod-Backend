@@ -32,11 +32,17 @@ router.post('/',
 //Ruta Actualizar un medico.
 router.put('/:id',
     [
+        validarJWT,
+        body('nombre', 'El nombre del médico es obligatorio').not().isEmpty(),
+        body('hospital', 'El hospital id debe de ser valido').isMongoId(),
+        validarCampos
     ],
     actualizarMedico);
 
 //Ruta eliminar un medico.
-router.delete('/:id', borrarMedico);
+router.delete('/:id',
+    validarJWT,
+    borrarMedico);
 
 
 

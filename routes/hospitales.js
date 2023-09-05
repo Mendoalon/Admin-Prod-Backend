@@ -31,11 +31,17 @@ router.post('/',
 //Ruta Actualizar un hospital.
 router.put('/:id',
     [
+        validarJWT,
+        body('nombre', 'El nombre del hospital es necesario').not().isEmpty(),
+        validarCampos
     ],
     actualizarHospital);
 
 //Ruta eliminar un hospital.
-router.delete('/:id', borrarHospital);
+router.delete('/:id',
+    validarJWT,
+    borrarHospital
+);
 
 
 
