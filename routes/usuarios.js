@@ -37,7 +37,7 @@ router.put('/:id',
     ],
     actualizarUsuario);
 
-//Ruta Actualizar un usuario.
+//Ruta eliminar un usuario.
 router.delete('/:id', validarJWT, borrarUsuario);
 
 
