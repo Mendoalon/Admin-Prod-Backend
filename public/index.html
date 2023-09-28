@@ -17,7 +17,7 @@
           //console.log("Encoded JWT ID token: " + response.credential);
           fetch(url, {
             method: 'POST',
-            headers:{ 'content-type': 'application/json' },
+            headers:{ 'Content-Type': 'application/json' },
             body: JSON.stringify({ token: response.credential })
           })
           .then(resp => resp.json() )
@@ -25,7 +25,7 @@
           .catch(console.log)
 
         }
-        window.onload = function () {
+        window.onload = function () { 
           google.accounts.id.initialize({
             client_id: "211741536323-9so71mg8nm6bki76n113sv3r7rvt7qbo.apps.googleusercontent.com",
             callback: handleCredentialResponse

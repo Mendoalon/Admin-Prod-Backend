@@ -13,11 +13,15 @@ const {
     getMedicos,
     creartMedico,
     actualizarMedico,
-    borrarMedico
+    borrarMedico,
+    getMedicoById
 } = require('../controllers/medicos')
 
 //Ruta Optener todos los medicos.
 router.get('/', validarJWT, getMedicos);
+
+//Ruta Optener medico por id.
+router.get('/:id', validarJWT, getMedicoById);
 
 //Ruta crear un medico.
 router.post('/',

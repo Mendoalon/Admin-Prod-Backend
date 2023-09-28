@@ -63,7 +63,7 @@ const fileUpload = (req = request, res = response) => {
 
         res.json({
             ok: true,
-            msg: 'Archivo subido',
+            msg: 'Imagen guardada',
             nombreArchivo
         });
 
@@ -73,15 +73,16 @@ const fileUpload = (req = request, res = response) => {
 const retornaImagen = (req, res) => {
     const { tipo, foto } = req.params;
     const pathImg = path.join(__dirname, `../uploads/${tipo}/${foto}`);
-
-    //Imagen por defecto
-    if( fs.existsSync(pathImg)){
-        res.sendFile(pathImg);
-    }else{
-        const pathImg = path.join(__dirname, `../uploads/no-img.jpg`);
-        res.sendFile(pathImg);
+  
+    // Verifica si la imagen existe
+    if (fs.existsSync(pathImg)) {
+      res.sendFile(pathImg);
+    } else {
+      // Si la imagen no existe, envía la imagen de respaldo
+      const pathNoImg = path.join(__dirname, `../uploads/no-img.jpg`);
+      res.sendFile(pathNoImg);
     }
-}
+  };
 
 module.exports = {
     fileUpload,

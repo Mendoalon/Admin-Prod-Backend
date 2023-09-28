@@ -93,8 +93,9 @@ const googleSignIn = async (req, res = response) => {
         res.json({
             ok: true,
             token,
-            menu: getMenuFrontEnd(usuario.role)
+            usuario
         });
+
 
     } catch (error) {
 
@@ -109,14 +110,27 @@ const googleSignIn = async (req, res = response) => {
 const renewToken = async (req, res = response) => {
 
     const uid = req.uid;
+    try {
 
-    // Generar el TOKEN - JWT
-    const token = await generarJWT(uid);
+        // Generar el TOKEN - JWT
+        const token = await generarJWT(uid);
 
-    res.json({
-        ok: true,
-        token
-    });
+        //Optener el usuario por UID.
+        const usuario = await Usuario.findById(uid);
+        res.json({
+            ok: true,
+            token,
+            usuario
+        });
+
+
+    } catch (error) {
+
+        res.status(401).json({
+            ok: false,
+            msg: 'Datos no validos',
+        });
+    }
 }
 
 module.exports = {
